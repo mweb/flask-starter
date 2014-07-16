@@ -1,4 +1,4 @@
-.h1 Flask-Starter
+# Flask-Starter
 
 This is a slightly flask starter templates that provides a started project
 for flask applications. The starter template includes the following python 
@@ -20,25 +20,27 @@ For testing:
 
 The web front end uses bootstrap, font-awesome, jquery and Moment.js.
 
-.h2 Open Issues
+## Open Issues
 
 The current starter templates is ready to be used but I intend to fix the 
 following points:
 
-*For Version 1.0*
+**For Version 1.0**
+
   * i18n
   * Better example page
 
-*For Future Versions*
+**For Future Versions**
   * Support for asynchronous job scheduling (celery & redis?)
   * Deployment
   * Blueprints
   * Use Flask-Assets für js files
 
-.h2 Setup
+## Setup
 
 To setup the project clone the project into some directory and then create
 a virtualenv for it.
+
 
     mkvirtualenv flask-env
     python setup.py develop
@@ -55,7 +57,7 @@ can be started with:
 
 On default the webserver is listening on port 5000.
 
-.h2 DB
+## DB
 
 Setup a new DB, since there is no release yet we don't use alembic revisions
 yet. We use alembic but the DB schema isn't stored in git which you would do
@@ -70,11 +72,11 @@ manually by starting the the flask shell and adding the users either by hand
 or with the given method call:
 
     python run.py shell
-
+    
     >>> import migrations.init_db as init_db
     >>> init_db.add_users()
 
-.h2 Bable
+## Bable
 
 Extract all the string form the application:
 
@@ -85,7 +87,7 @@ Start the translation for example for German:
     pybabel init -i messages.dot -d translations -l de
 
 Translations is the folder where the translations get stored. The po file can
-be found here __translations/de/LC_MESSAGES/messages.po__
+be found here `translations/de/LC_MESSAGES/messages.po`
 When the translations is finished compile the translation file:
 
     pybabel compile -d translations
@@ -94,7 +96,7 @@ When string changed you can use pybable to merge the changes
 
     pybable update -i messages.pot -d translations
 
-.h2 Testing
+## Testing
 
 to run the test start them with the following command:
 
