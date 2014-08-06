@@ -1,0 +1,8 @@
+*.pyc
+.ropeproject
+env
+*.egg-info
+*.swp
+development.db
+.coverage
+htmlcov
