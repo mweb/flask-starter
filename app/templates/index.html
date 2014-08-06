@@ -1,8 +1,10 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1> CONTENT: Static</h1>
-Got: {{ data }}
+<h1> {{ _('Start page') }} </h1>
+<p>
+{{ _('The content of this page is:') }} {{ data }}
+</p>
 {% endblock %}
 
 {% block scripts%}

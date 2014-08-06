@@ -28,6 +28,7 @@ from flask import Flask
 from flask.ext.login import LoginManager
 from flask.ext.principal import Principal, Permission, RoleNeed
 from flask.ext.sqlalchemy import SQLAlchemy
+from flask.ext.babel import Babel
 
 app = Flask(__name__, instance_relative_config=True)
 app.config.from_object('app.default_settings')
@@ -41,6 +42,7 @@ login_manager.init_app(app)
 login_manager.login_view = 'login'
 
 db = SQLAlchemy(app)
+babel = Babel(app)
 
 import views
 import models

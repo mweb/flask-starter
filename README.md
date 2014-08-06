@@ -80,11 +80,11 @@ or with the given method call:
 
 Extract all the string form the application:
 
-    pybable extract -f bable.cfg -o messages.pot .
+    pybable extract -F babel.cfg -o messages.pot .
 
 Start the translation for example for German:
 
-    pybabel init -i messages.dot -d translations -l de
+    pybabel init -i messages.dot -d app/translations -l de
 
 Translations is the folder where the translations get stored. The po file can
 be found here `translations/de/LC_MESSAGES/messages.po`
@@ -94,7 +94,7 @@ When the translations is finished compile the translation file:
 
 When string changed you can use pybable to merge the changes
 
-    pybable update -i messages.pot -d translations
+    pybable update -i messages.pot -d app/translations
 
 ## Testing
 

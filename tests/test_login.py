@@ -40,12 +40,12 @@ def test_login_logout(flask_app):
     rv = flask_app.get('/admin')
     assert "Admin welcome to the Matrix" in rv.data
     rv = logout(flask_app)
-    assert "CONTENT" in rv.data
+    assert "The content of this page" in rv.data
 
     rv = login(flask_app, 'douglas@adams.org', 'default')
     assert "[douglas]" in rv.data
     rv = logout(flask_app)
-    assert "CONTENT" in rv.data
+    assert "The content of this page" in rv.data
 
     # wrong password
     rv = login(flask_app, 'admin@admin.org', 'defaultt')
@@ -67,33 +67,34 @@ def test_admin_page(flask_app):
 
     # login as admin
     rv = login(flask_app, 'admin@admin.org', 'default')
-    assert "CONTENT" in rv.data
+    print rv.data
+    assert "The content of this page" in rv.data
     rv = flask_app.get('/admin')
     rv.status_code == 400
     assert "Admin welcome to the Matrix" in rv.data
     rv = logout(flask_app)
-    assert "CONTENT" in rv.data
+    assert "The content of this page" in rv.data
     rv = flask_app.get('/admin')
     assert rv.status_code == 403
     assert "403" in rv.data
 
     # login as little_admin
     rv = login(flask_app, 'little_admin@admin.org', 'default')
-    assert "CONTENT" in rv.data
+    assert "The content of this page" in rv.data
     rv = flask_app.get('/admin')
     rv.status_code == 400
     assert "Admin welcome to the Matrix" in rv.data
     rv = logout(flask_app)
-    assert "CONTENT" in rv.data
+    assert "The content of this page" in rv.data
 
     # login as regular user
     rv = login(flask_app, 'douglas@adams.org', 'default')
-    assert "CONTENT" in rv.data
+    assert "The content of this page" in rv.data
     rv = flask_app.get('/admin')
     rv.status_code == 403
     assert "403" in rv.data
     rv = logout(flask_app)
-    assert "CONTENT" in rv.data
+    assert "The content of this page" in rv.data
 
 
 @pytest.fixture

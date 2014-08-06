@@ -44,8 +44,9 @@ from flask.ext.principal import (
     Identity,
     RoleNeed,
     UserNeed)
+from flask.ext.babel import gettext
 
-from .. import app, admin_permission
+from .. import app, admin_permission, babel
 from ..forms.login_form import LoginForm
 from .navigations import Navigation, Dropdown, Divider
 
@@ -91,34 +92,35 @@ def add_parents(identity, group):
 def index():
     ''' The start page '''
     if g.user.is_authenticated():
-        return render_template("index.html",
-                               title="App",
-                               data="DATA",
-                               navigations=[
-                                    Navigation('test', '#test'),
-                                    Navigation('About', '#about'),
-                                    Dropdown('[{0}]'.format(g.user.name),
-                                             [Navigation('Settings', '/index'),
-                                              Divider(),
-                                              Navigation('Logout', '/logout')])])
+        return render_template(
+            "index.html", title=gettext("App"), data=gettext("DATA"),
+            navigations=[
+                Navigation(gettext('Test'), '#test'),
+                Navigation(gettext('About'), '#about'),
+                Dropdown('[{0}]'.format(g.user.name), [
+                    Navigation(gettext('Settings'), '/index'), Divider(),
+                    Navigation(gettext('Logout'), '/logout')])])
     else:
-        return render_template("index.html", title="App",
-                               data="DATA",
-                               navigations=[Navigation('test', '#test'),
-                                            Navigation('About', '#about'),
-                                            Navigation('Login', '/login')])
+        return render_template(
+            "index.html", title="App", data="DATA", navigations=[
+                Navigation(gettext('Test'), '#test'),
+                Navigation(gettext('About'), '#about'),
+                Navigation(gettext('Login'), '/login')])
 
 
 @app.route('/admin')
 @admin_permission.require(403)
 def admin():
     ''' The admin start page '''
-    return render_template('admin.html',
-                           text="Admin welcome to the Matrix {0}".format(
-                               g.user.name),
-                           title="App [Admin]",
-                           navigations=[Navigation('test', '#test'),
-                                        Navigation('About', '#about')])
+    return render_template(
+        'admin.html',
+        text=gettext("Admin welcome to the Matrix %(name)s", name=g.user.name),
+        title="App [Admin]",
+        navigations=[Navigation(gettext('Test'), '#test'),
+                     Navigation(gettext('About'), '#about'),
+                     Dropdown('[{0}]'.format(g.user.name), [
+                         Navigation(gettext('Settings'), '/index'), Divider(),
+                         Navigation(gettext('Logout'), '/logout')])])
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -130,7 +132,10 @@ def login():
         identity_changed.send(current_app._get_current_object(),
                               identity=Identity(form.user.id))
         return redirect(request.args.get('next') or url_for('index'))
-    return render_template('login.html', form=form)
+    return render_template(
+        'login.html', form=form, navigations=[
+            Navigation(gettext('Test'), '#test'),
+            Navigation(gettext('About'), '#about')])
 
 
 @app.route('/logout')
@@ -156,3 +161,9 @@ def page_not_found(e):
 @app.errorhandler(403)
 def access_denied(e):
     return render_template('403.html'), 403
+
+
+@babel.localeselector
+def get_local():
+    translations = [str(tr) for tr in babel.list_translations()] + ['en']
+    return request.accept_languages.best_match(translations)
