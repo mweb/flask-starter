@@ -1,7 +1,7 @@
 # Flask-Starter
 
-This is a slightly flask starter templates that provides a started project
-for flask applications. The starter template includes the following python 
+This is a simple flask starter template that provides a starting point
+for a flask application. The starter template uses the following python
 packages:
 
   * Flask
@@ -18,11 +18,11 @@ For testing:
 
   * pytest
 
-The web front end uses bootstrap, font-awesome, jquery and Moment.js.
+The web front end uses bootstrap, font-awesome, jquery.
 
 ## Open Issues
 
-The current starter templates is ready to be used but I intend to fix the
+The current starter template is ready to be used but I intend to fix the
 following points:
 
 **For Version 1.0**
@@ -46,7 +46,7 @@ a virtualenv for it.
     pip install pytest pytest-cov
 
 
-This should install all the required packages to get started with the
+This should install all the required packages to get you started with the
 development.
 
 Now the DB needs to be initialiezed and afterwards the development webserver
@@ -97,7 +97,7 @@ When string changed you can use pybable to merge the changes
 
 ## Testing
 
-to run the test start them with the following command:
+To run the test start them with the following command:
 
     py.test tests
 
