@@ -22,12 +22,11 @@ The web front end uses bootstrap, font-awesome, jquery and Moment.js.
 
 ## Open Issues
 
-The current starter templates is ready to be used but I intend to fix the 
+The current starter templates is ready to be used but I intend to fix the
 following points:
 
 **For Version 1.0**
 
-  * i18n
   * Better example page
 
 **For Future Versions**
